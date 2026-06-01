@@ -1,21 +1,21 @@
-FROM ubuntu:22.04
+FROM python:3.11-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV NAME=dragonsden
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install --no-install-recommends -y \
         gcc \
         make \
-        python3-pip && \
+        libpq-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app/
-RUN pip3 install --no-cache-dir --upgrade pip wheel && \
-    pip3 install --no-cache-dir -r requirements.txt
+
+RUN pip install --no-cache-dir --upgrade pip wheel && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/

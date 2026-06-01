@@ -1,6 +1,8 @@
 version: '3.11'
 services:
   dragonsden:
+
+    image: dragonsden_api:devel
     build: .
     restart: on-failure
     command:

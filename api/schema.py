@@ -35,7 +35,6 @@ class Query(graphene.ObjectType):
 
     player_progress = graphene.Field(
         PlayerProgressType,
-        id=graphene.ID(required=True),
         wallet=graphene.String(required=True)
     )
 
